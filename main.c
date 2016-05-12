@@ -9,6 +9,7 @@ int main(int argc, char **argv)
 	glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE);
 	glfwOpenWindow(600,600,8,8,8,8,0,0,GLFW_WINDOW);
 	glfwSetWindowTitle("OpenGL Game");
+	glClearColor(1.0f,1.0f,1.0f,1.0f);
 	
 	gameWindow.running = 1; 
 	while(gameWindow.running) {
@@ -16,6 +17,7 @@ int main(int argc, char **argv)
 		gameWindowUpdate();
 		gameWindow.running = glfwGetWindowParam(GLFW_OPENED);
 	}
+	
 	glfwTerminate();
 	return 0;
 }
