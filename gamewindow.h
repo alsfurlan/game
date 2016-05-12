@@ -1,6 +1,8 @@
 #ifndef __gamewindow_h__
 #define __gamewindow_h__
 
+#define SQUARE_SIZE	100
+
 typedef struct gameWindow {
 	int running;	
 	GLfloat height;
@@ -22,9 +24,9 @@ void gameWindowRender()
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glBegin(GL_QUADS);
 		glVertex2f(0.0f,0.0f);
-		glVertex2f(100.0f,0.0f);
-		glVertex2f(100.0f,100.0f);
-		glVertex2f(0.0f,100.0f);
+		glVertex2f(SQUARE_SIZE,0.0f);
+		glVertex2f(SQUARE_SIZE,SQUARE_SIZE);
+		glVertex2f(0.0f,SQUARE_SIZE);
 	glEnd();
 	
 	glfwSwapBuffers();
