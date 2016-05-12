@@ -10,6 +10,9 @@ typedef struct gameWindow {
 void gameWindowInit(GameWindow g) 
 {
 	glClearColor(1.0f,1.0f,1.0f,1.0f);
+	glViewport(0.0f,0.0f, g.width, g.height);
+	glMatrixMode(GL_PROJECTION);
+	gluOrtho2D(0, g.width, 0, g.height);
 }
 
 void gameWindowRender() 
