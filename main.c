@@ -1,4 +1,4 @@
-#include <GL/glfw.h>
+#include "bibliotecas.h"
 #include "gamewindow.h"
 
 GameWindow gameWindow;
@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	glfwOpenWindow(gameWindow.width,gameWindow.height,8,8,8,8,0,0,GLFW_WINDOW);
 	glfwSetWindowTitle("OpenGL Game");
 	
+	glewInit();	
 	// Inicialização das configurações do game
 	gameWindowInit(gameWindow);
 	while(gameWindow.running) {

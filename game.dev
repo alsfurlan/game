@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=2
+UnitCount=3
 
 [VersionInfo]
 Major=1
@@ -64,6 +64,16 @@ BuildCmd=
 FileName=gamewindow.h
 CompileCpp=0
 Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit3]
+FileName=bibliotecas.h
+CompileCpp=0
+Folder=game
 Compile=1
 Link=1
 Priority=1000
