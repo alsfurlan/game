@@ -1,6 +1,7 @@
 #ifndef __gamewindow_h__
 #define __gamewindow_h__
 
+#include <GL/glfw.h>
 #define SQUARE_SIZE	100
 
 typedef struct gameWindow {
@@ -12,14 +13,16 @@ typedef struct gameWindow {
 
 typedef struct {
 	GLfloat positionCoordinates[3];
+	GLfloat textureCoordinates[2];
 } VertexData;
 
 VertexData vertexData[4] = {
-	{0.0f,0.0f,0.0f},
-	{SQUARE_SIZE,0.0f,0.0f},
-	{SQUARE_SIZE,SQUARE_SIZE,0.0f},
-	{0.0f,SQUARE_SIZE,0.0f},	
+	{{0.0f,0.0f,0.0f}, {0.0f, 0.0f}},
+	{{SQUARE_SIZE,0.0f,0.0f}, {1.0f, 0.0f}},
+	{{SQUARE_SIZE,SQUARE_SIZE,0.0f}, {1.0f, 1.0f}},
+	{{0.0f,SQUARE_SIZE,0.0f}, {0.0f, 1.0f}}
 };
+
 void gameWindowInit(GameWindow g) 
 {
 	g.vertexBufferID = 0;
@@ -34,6 +37,8 @@ void gameWindowInit(GameWindow g)
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3,GL_FLOAT,sizeof(VertexData),(GLvoid *)offsetof(VertexData,positionCoordinates));
 	 
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *) offsetof(VertexData, textureCoordinates));
 }
 
 void gameWindowRender() 
