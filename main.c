@@ -1,8 +1,6 @@
 #include "bibliotecas.h"
 #include "gamewindow.h"
 
-GameWindow gameWindow;
-
 int main(int argc, char **argv)
 {
 	gameWindow.running = 1; 
@@ -17,7 +15,7 @@ int main(int argc, char **argv)
 	
 	glewInit();	
 	// Inicialização das configurações do game
-	gameWindowInit(gameWindow);
+	gameWindowInit();
 	while(gameWindow.running) {
 		gameWindowRender();
 		gameWindowUpdate();

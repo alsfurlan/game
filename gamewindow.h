@@ -2,6 +2,8 @@
 #define __gamewindow_h__
 
 #include <GL/glfw.h>
+#include "sprite.h"
+
 #define SQUARE_SIZE	100
 
 typedef struct gameWindow {
@@ -10,12 +12,15 @@ typedef struct gameWindow {
 	GLfloat width;
 	GLuint vertexBufferID;
 	GLuint textureBufferID;
+	Sprite rocket;
 } GameWindow;
 
 typedef struct {
 	GLfloat positionCoordinates[3];
 	GLfloat textureCoordinates[2];
 } VertexData;
+
+GameWindow gameWindow;
 
 VertexData vertexData[4] = {
 	{{0.0f,0.0f,0.0f}, {0.0f, 0.0f}},
@@ -45,16 +50,16 @@ GLuint gameWindowLoadAndBufferImage(const char *filename)
 	return textureBufferID;
 }
 
-void gameWindowInit(GameWindow g) 
+void gameWindowInit() 
 {
-	g.vertexBufferID = 0;
+	gameWindow.vertexBufferID = 0;
  	glClearColor(1.0f,1.0f,1.0f,1.0f);
-	glViewport(0.0f,0.0f, g.width, g.height);
+	glViewport(0.0f,0.0f, gameWindow.width, gameWindow.height);
 	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0, g.width, 0, g.height);
+	gluOrtho2D(0, gameWindow.width, 0, gameWindow.height);
 	
-	glGenBuffers(1, &g.vertexBufferID);
-	glBindBuffer(GL_ARRAY_BUFFER,g.vertexBufferID);
+	glGenBuffers(1, &gameWindow.vertexBufferID);
+	glBindBuffer(GL_ARRAY_BUFFER,gameWindow.vertexBufferID);
 	glBufferData(GL_ARRAY_BUFFER,sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3,GL_FLOAT,sizeof(VertexData),(GLvoid *)offsetof(VertexData,positionCoordinates));
@@ -66,15 +71,17 @@ void gameWindowInit(GameWindow g)
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *) offsetof(VertexData, textureCoordinates));
 	
-	g.textureBufferID = gameWindowLoadAndBufferImage("imagens/rocket.tga");
+	gameWindow.textureBufferID = gameWindowLoadAndBufferImage("imagens/rocket.tga");
 	
-	
+	gameWindow.rocket.textureBufferID = gameWindowLoadAndBufferImage("imagens/rocket.tga");
+	gameWindow.rocket.position.x = 300;
+	gameWindow.rocket.position.y = 300;
 }
 
 void gameWindowRender() 
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glDrawArrays(GL_QUADS, 0, 4);
+	spriteRender(gameWindow.rocket);
 	glfwSwapBuffers();
 }
 
